@@ -6,6 +6,13 @@
   // Once sound is requested, its playback clock drives the opening. Pausing
   // or buffering the track also holds the type at the matching point.
   let scoreTime = null;
+  let started = false;
+  label.addEventListener('label:start', () => {
+    started = true;
+    scoreTime = 0;
+    label.classList.add('motion-ready');
+    syncScore();
+  });
   function syncScore() {
     if (scoreTime === null || preference.matches) return;
     label.getAnimations({subtree: true}).forEach(animation => {
@@ -80,7 +87,7 @@
       rules[index].style.setProperty('--duration', index < 2 ? '.8s' : '1.15s');
       rules[index].style.setProperty('--origin', index % 2 ? 'right' : 'left');
     });
-    label.classList.add('motion-ready');
+    if (started) label.classList.add('motion-ready');
     syncScore();
   }).catch(() => {
     clearTimeout(timeout);
