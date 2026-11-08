@@ -9,10 +9,11 @@
 <meta property="og:description" content="Ideas in circulation. A place for design, sound, image and ideas. Opening soon.">
 <meta property="og:url" content="https://thecrate.ca/"><meta property="og:image" content="https://thecrate.ca/assets/label-share.png">
 <link rel="preload" href="assets/worn-label-paper.png" as="image">
-<link rel="stylesheet" href="motion.css?v=2">
-<script src="motion.js?v=2" defer></script>
-<link rel="stylesheet" href="sound.css?v=2">
-<script src="sound.js?v=2" defer></script>
+<link rel="stylesheet" href="motion.css?v=3">
+<script>document.documentElement.classList.add('motion-pending');setTimeout(()=>document.documentElement.classList.remove('motion-pending'),6500);</script>
+<script src="motion.js?v=3" defer></script>
+<link rel="stylesheet" href="sound.css?v=3">
+<script src="sound.js?v=3" defer></script>
 <style>
 *{box-sizing:border-box}html{background:#000100;color:#11130f}body{margin:0;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}main{min-height:100svh;display:grid;place-items:center}article{position:relative;width:min(100vw,96svh,1200px);aspect-ratio:1;container-type:inline-size;background:url('assets/worn-label-paper.png') center/100% 100% no-repeat}.type{position:absolute;margin:0;padding:0}.rule{position:absolute;background:#11130f}::selection{background:#11130f;color:#c8c4aa}
 </style></head><body><main><article aria-label="The Crate — Institute for Creative Thought record label">
@@ -37,7 +38,7 @@
 <section class="sound-panel" aria-label="Soundtrack">
   <p class="sound-credit">Out the Crate <span aria-hidden="true">/</span> 74 BPM <span aria-hidden="true">/</span> 3:29</p>
   <audio id="soundtrack" controls preload="none" aria-label="Out the Crate, 74 BPM, 3 minutes 29 seconds" src="assets/out-the-crate.mp3"></audio>
-  <p class="sound-hint" id="sound-instructions">Touch the label to begin. Drag the black to scratch.</p>
+  <p class="sound-hint" id="sound-instructions">Touch the label to play.</p>
   <p class="sound-status" role="status"></p>
 </section>
 </main></body></html>

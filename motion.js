@@ -3,28 +3,6 @@
   const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
   if (!label || preference.matches) return;
 
-  // Once sound is requested, its playback clock drives the opening. Pausing
-  // or buffering the track also holds the type at the matching point.
-  let scoreTime = null;
-  let started = false;
-  label.addEventListener('label:start', () => {
-    started = true;
-    scoreTime = 0;
-    label.classList.add('motion-ready');
-    syncScore();
-  });
-  function syncScore() {
-    if (scoreTime === null || preference.matches) return;
-    label.getAnimations({subtree: true}).forEach(animation => {
-      animation.pause();
-      animation.currentTime = scoreTime * 1000;
-    });
-  }
-  label.addEventListener('label:score', event => {
-    scoreTime = event.detail.time;
-    syncScore();
-  });
-
   // Keep the complete static design visible if assets or scripts cannot load.
   // The sequence is installed atomically only after paper and fonts are ready.
   const paper = new Image();
@@ -87,8 +65,7 @@
       rules[index].style.setProperty('--duration', index < 2 ? '.8s' : '1.15s');
       rules[index].style.setProperty('--origin', index % 2 ? 'right' : 'left');
     });
-    if (started) label.classList.add('motion-ready');
-    syncScore();
+    label.classList.add('motion-ready');
   }).catch(() => {
     clearTimeout(timeout);
     document.documentElement.classList.remove('motion-pending');

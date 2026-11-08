@@ -5,21 +5,18 @@ A responsive record-label placeholder for https://thecrate.ca, hosted on GitHub 
 The soundtrack is Out the Crate (74 BPM, 3:29), the approved full vocal arrangement over Throop Avenue Last Call. The original instrumental and editable studio sources are preserved outside this deployment.
 
 Interaction
-- Sound and the 9.55-second typography reveal start together when the browser permits autoplay.
-- Browsers that require a gesture display the complete static label first. Touching the label starts sound and the reveal together.
-- The label is an invisible, circular native button. Tap, Enter or Space toggles playback.
-- Drag anywhere in the black background to scratch the actual stereo audio forwards or backwards. Vertical movement also sweeps the tone. Holding still stops the sound; releasing continues at the sample actually being heard, without jumping back to an earlier timeline.
-- Pointer capture retains the gesture across the label and outside the original hit area. Cancellation releases the scratch; hiding the page pauses playback.
-- Typography advances during playback, holds during pause/scratch and stays revealed afterwards. Reduced-motion visitors see stationary typography.
+- The 9.55-second typography reveal runs once on page load, after the paper and fonts are ready. It completes independently of audio permission, playback or label taps, then holds the finished layout.
+- Sound attempts to play automatically. Where the browser requires a gesture, touching the label starts only the audio.
+- The label is an invisible, circular native button. Tap, Enter or Space toggles audio play/pause. Resuming sound never restarts the typography.
+- The black background has no sound interaction. Scratching and warping have been removed.
+- Hiding the page pauses audio. Reduced-motion visitors see stationary typography.
 
 Implementation
-sound.js handles loading, browser audio activation and Pointer Events. scratch-processor.js performs bidirectional interpolation, variable speed, smoothing and playhead reporting in an AudioWorklet. The full 320 kbps MP3 is fetched and decoded once. PCM channels are transferred to the audio thread. sound.css contains the circular hit area and minimal instructions. motion.js / motion.css contain the reveal. The label copy and positions remain in index.html.
+sound.js uses native HTML audio playback, independent of motion.js / motion.css. sound.css contains the circular hit area and minimal instructions. The label copy and positions remain in index.html. No AudioWorklet or full-track PCM decoding is needed.
 
 Fallbacks
-No JavaScript, or browsers without AudioWorklet, retain native audio controls. Network/decode errors offer a label-tap retry. No microphone permission is needed. Browser autoplay policies cannot be bypassed.
+Without JavaScript the original static label and native audio controls remain available. A bounded startup fallback prevents hidden text if assets fail. Audio errors offer a label-tap retry.
 
-Verification
-Run node --test tests/scratch-processor.test.cjs for forward/reverse playback, pause, held silence, release continuity, boundaries and replay. Local browser checks cover label/keyboard activation, reverse/vertical dragging, release, and a 390 × 844 viewport.
 Run locally: python3 -m http.server 8767
 
 Editable FigCraft and DesignCraft documents and original source assets remain in the studio project outside this public repository.
