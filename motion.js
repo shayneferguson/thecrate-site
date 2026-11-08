@@ -12,6 +12,6 @@
     if (cancelled || preference.matches) { show(); return; }
     hero.classList.add('entering');
     show();
-    hero.querySelector('.site-address').addEventListener('animationend', () => hero.classList.remove('entering'), {once:true});
+    hero.querySelector('.sound-panel').addEventListener('animationend', () => hero.classList.remove('entering'), {once:true});
   }).catch(() => { clearTimeout(timeout); show(); });
 })();

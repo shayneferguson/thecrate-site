@@ -17,9 +17,7 @@ button { font:inherit; color:inherit; }
 .institute { margin:0; color:var(--orange); text-align:right; }
 .institute span { display:block; }
 .brand { margin:0; font:inherit; white-space:nowrap; }
-.hero-footer { position:absolute; left:5%; right:5%; bottom:max(30px,env(safe-area-inset-bottom)); display:flex; justify-content:space-between; align-items:flex-end; gap:24px; }
-.site-address { margin:0 0 7px; font-size:clamp(21px,2.25vw,36px); font-weight:750; letter-spacing:-.025em; }
-.edition { margin:0; font-size:11px; line-height:1.4; letter-spacing:.09em; }
+.hero-footer { position:absolute; left:5%; right:5%; bottom:max(30px,env(safe-area-inset-bottom)); display:flex; justify-content:flex-end; align-items:flex-end; gap:24px; }
 .sound-panel { text-align:right; }
 .label-control { display:block; margin-left:auto; border:0; padding:10px 0 5px; background:transparent; cursor:pointer; text-align:right; }
 .label-control[hidden],.record-touch[hidden] { display:none; }
@@ -45,8 +43,6 @@ button:focus-visible { outline:2px solid var(--cream); outline-offset:6px; }
   .credits { left:5%; top:9%; font-size:clamp(19px,5vw,30px); }
   .title-lockup { left:5%; right:5%; top:36%; gap:.25em; font-size:8vw; letter-spacing:-.055em; }
   .hero-footer { bottom:max(24px,env(safe-area-inset-bottom)); gap:12px; }
-  .site-address { font-size:22px; }
-  .edition { font-size:8px; }
   .sound-hint { font-size:11px; }
   .sound-credit { font-size:8px; }
   .record-touch { right:0; bottom:15%; width:66%; height:38%; }
