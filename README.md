@@ -1,5 +1,7 @@
-# The Crate
+The Crate — Institute for Creative Thought
 
-Temporary coming-soon page for **thecrate.ca**, hosted on GitHub Pages.
+A responsive record-label placeholder for https://thecrate.ca. Typography is HTML text; paper grain and spindle artwork are SVG. Hosted on GitHub Pages.
 
-Edit `index.html` to change the copy and styling. This repository is separate from the Crate Institute archive.
+Editable FigCraft and DesignCraft documents are kept in the studio project, outside the public web repository.
+
+Run locally: python3 -m http.server 8767
