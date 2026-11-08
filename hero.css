@@ -5,9 +5,11 @@ body { overflow-x:clip; }
 button { font:inherit; color:inherit; }
 .hero { position:relative; isolation:isolate; min-height:620px; height:100svh; height:100dvh; overflow:clip; }
 .sleeve-visual { position:absolute; inset:0; z-index:-3; overflow:hidden; }
-.vinyl-plate { position:absolute; inset:-3%; width:106%; height:106%; object-fit:cover; object-position:center bottom; animation:vinyl-drift 22s ease-in-out infinite alternate; }
-@keyframes vinyl-drift { from { transform:scale(1) rotate(-.6deg); } to { transform:scale(1.055) rotate(1.2deg); } }
-[data-grooves="paused"] .vinyl-plate { animation-play-state:paused; }
+.vinyl-plate { position:absolute; inset:-3%; width:106%; height:106%; object-fit:cover; object-position:center bottom; }
+/* Video holds its current frame when music stops; the poster remains a fallback. */
+.record-film { opacity:0; pointer-events:none; }
+.video-ready .record-film { opacity:1; }
+@media(prefers-reduced-motion:reduce) { .video-ready .record-film { opacity:0; } }
 .shade { position:absolute; inset:0; z-index:-2; background:linear-gradient(90deg,rgba(9,6,4,.48),transparent 68%),linear-gradient(0deg,rgba(8,5,3,.82),transparent 20%); pointer-events:none; }
 .credits { position:absolute; left:5%; top:8%; margin:0; padding:0; list-style:none; font-size:clamp(22px,2.6vw,43px); line-height:1.04; font-weight:400; letter-spacing:-.025em; }
 .credits li:nth-child(2) { padding-left:2em; }

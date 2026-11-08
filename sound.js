@@ -1,6 +1,8 @@
 (() => {
   const audio = document.querySelector('#soundtrack');
   const label = document.querySelector('article');
+  const film = document.querySelector('#record-film');
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const record = document.querySelector('.record-stage');
   const control = document.querySelector('.label-control');
   const controls = [...document.querySelectorAll('.label-control, .record-touch')];
@@ -15,6 +17,27 @@
   let request = 0, fadeFrame = 0, fadeVersion = 0;
   let context, gain;
   let prepared = false;
+  let filmPending = false, buffering = false;
+  function filmShouldPlay() {
+    return !reducedMotion.matches && !document.hidden && !audio.paused && !audio.ended && !buffering && audio.readyState >= 3 && (!context || context.state === 'running');
+  }
+  function syncFilm() {
+    if (!film) return;
+    if (!filmShouldPlay()) { film.pause(); return; }
+    if (!film.paused || filmPending) return;
+    filmPending = true;
+    film.play().then(() => {
+      filmPending = false;
+      if (!filmShouldPlay()) film.pause();
+      else label.classList.add('video-ready');
+    }).catch(() => { filmPending = false; });
+  }
+  if (film) {
+    film.muted = true;
+    film.addEventListener('canplay', syncFilm);
+    film.addEventListener('error', () => label.classList.remove('video-ready'));
+  }
+  reducedMotion.addEventListener('change', syncFilm);
   let envelope = {from: 0, to: 0, start: 0, duration: 0};
   const now = () => context ? context.currentTime : performance.now() / 1000;
   const smooth = x => x * x * (3 - 2 * x);
@@ -35,6 +58,7 @@
     prepared = true;
   }
   function update() {
+    syncFilm();
     label.dataset.playback = requested ? 'playing' : 'paused';
     if (record) record.dataset.grooves = groovesPaused ? 'paused' : 'running';
     controls.forEach(button => {
@@ -120,12 +144,15 @@
   }
   controls.forEach(button => button.addEventListener('click', () => requested ? pause() : play(true)));
   audio.addEventListener('playing', () => {
+    buffering = false;
     if (!requested) return;
     started = true;
     status.textContent = '';
     update();
   });
   audio.addEventListener('waiting', () => {
+    buffering = true;
+    syncFilm();
     if (requested) status.textContent = 'Loading sound…';
   });
   audio.addEventListener('pause', () => {
