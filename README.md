@@ -1,6 +1,6 @@
 The Crate — Institute for Creative Thought
 
-A responsive record-label placeholder for https://thecrate.ca, hosted on GitHub Pages. Typography is real HTML; the worn paper and spindle are a separate background image.
+A responsive record-label placeholder for https://thecrate.ca, hosted on GitHub Pages. Typography is real HTML at full opacity; the worn paper and spindle are a separate background layer at 80% opacity. The paper circle is centred independently of its original image canvas.
 
 The soundtrack is Out the Crate (74 BPM, 3:29), the approved full vocal arrangement over Throop Avenue Last Call. The original instrumental and editable studio sources are preserved outside this deployment.
 
@@ -8,7 +8,7 @@ Interaction
 - The 9.55-second typography reveal runs once on page load, after the paper and fonts are ready. It completes independently of audio permission, playback or label taps, then holds the finished layout.
 - Sound attempts to play automatically. Where the browser requires a gesture, touching the label starts only the audio.
 - The label is an invisible, circular native button. Tap, Enter or Space toggles audio play/pause. Resuming sound never restarts the typography.
-- Eighteen white vector grooves surround the stationary label at 60% group opacity. Each follows its own continuous 48–138 second rotation, with varied offsets and directions. They move on load, then pause/resume with the label’s audio controls without resetting their angles. Autoplay denial leaves the introductory visual moving until audio is started.
+- Eighteen white vector grooves surround the stationary label at 40% group opacity. The innermost circle maintains an equal gap around the label; the remaining rings use evenly stepped radii with gentle bounded irregularity, spread across a wider band. Each follows its own continuous 48–138 second rotation, with varied offsets and directions. They move on load, then pause/resume with the label’s audio controls without resetting their angles. Autoplay denial leaves the introductory visual moving until audio is started.
 - The black background has no sound interaction. Scratching and warping remain removed.
 - Hiding the page pauses audio. Reduced-motion visitors see stationary typography and grooves.
 
