@@ -5,7 +5,7 @@ body .record-stage { position: relative; isolation: isolate; width: min(168vw, m
 body .record-stage article { width: 52%; z-index: 1; clip-path: circle(46% at 50% 50%); }
 /* Centre the paper's measured circular bounds, independently of its source canvas. */
 body .record-stage article::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url('assets/worn-label-paper.png') center/100% 100% no-repeat; transform: translate(-.0797%, -1.874%); opacity: .8; pointer-events: none; }
-.record-grooves { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; opacity: .1; }
+.record-grooves { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; opacity: .5; }
 .groove { fill: none; stroke: #fff; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
 .groove-band { transform-box: view-box; transform-origin: 50% 50%; animation: groove-orbit var(--turn) linear var(--phase) infinite var(--direction); }
 .record-stage[data-grooves="paused"] .groove-band { animation-play-state: paused; }
