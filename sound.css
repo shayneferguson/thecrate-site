@@ -1,13 +1,16 @@
-body main { min-height: 100svh; min-height: 100dvh; padding: 16px 0 max(12px, env(safe-area-inset-bottom)); gap: 8px; grid-template-rows: 1fr auto; }
-body .record-stage { position: relative; isolation: isolate; width: min(100vw, max(280px, calc(100svh - 112px)), 1100px); aspect-ratio: 1; display: grid; place-items: center; }
-body .record-stage article { width: 78%; z-index: 1; clip-path: circle(46% at 50% 50%); }
+/* Crop the wider record at the screen edges without creating horizontal scroll. */
+body { overflow-x: clip; }
+body main { width: 100%; min-width: 0; grid-template-columns: minmax(0, 1fr); min-height: 100svh; min-height: 100dvh; padding: 16px 0 max(12px, env(safe-area-inset-bottom)); gap: 8px; grid-template-rows: 1fr auto; }
+body .record-stage { position: relative; isolation: isolate; width: min(168vw, max(240px, calc(100svh - 112px)), 1280px); aspect-ratio: 1; display: grid; place-items: center; }
+body .record-stage article { width: 52%; z-index: 1; clip-path: circle(46% at 50% 50%); }
 /* Centre the paper's measured circular bounds, independently of its source canvas. */
 body .record-stage article::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url('assets/worn-label-paper.png') center/100% 100% no-repeat; transform: translate(-.0797%, -1.874%); opacity: .8; pointer-events: none; }
 .record-grooves { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; opacity: .1; }
-.groove { fill: none; stroke: #fff; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; transform-box: view-box; transform-origin: 50% 50%; animation: groove-orbit var(--turn) linear var(--phase) infinite var(--direction); }
-.record-stage[data-grooves="paused"] .groove { animation-play-state: paused; }
+.groove { fill: none; stroke: #fff; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
+.groove-band { transform-box: view-box; transform-origin: 50% 50%; animation: groove-orbit var(--turn) linear var(--phase) infinite var(--direction); }
+.record-stage[data-grooves="paused"] .groove-band { animation-play-state: paused; }
 @keyframes groove-orbit { to { transform: rotate(360deg); } }
-@media (prefers-reduced-motion: reduce) { .groove { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .groove-band { animation: none; } }
 .label-control { position: absolute; z-index: 2; inset: 5%; border: 0; padding: 0; border-radius: 50%; clip-path: circle(50%); background: transparent; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 .label-control[hidden] { display: none; }
 .label-control:focus-visible { outline: 2px solid #11130f; outline-offset: -8px; }
