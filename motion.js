@@ -50,19 +50,19 @@
 
     type[0].classList.add('wordmark');
     type[5].classList.add('headline');
-    revealText(type[0], .65, 1.15, true, .14);
-    revealText(type[1], 1.95, .95);
-    revealText(type[2], 2.45, .95);
-    revealText(type[3], 3.05, 1.05);
-    revealText(type[4], 3.7, 1.05);
-    revealText(type[5], 4.65, 1.45, true, .32);
-    revealText(type[6], 6.45, 1.05, false, .25);
-    revealText(type[7], 8.15, 1.1);
-    revealText(type[8], 8.45, 1.1);
+    revealText(type[0], .15, .55, true, .08);
+    revealText(type[1], .65, .45);
+    revealText(type[2], .9, .45);
+    revealText(type[3], 1.15, .5);
+    revealText(type[4], 1.45, .5);
+    revealText(type[5], 1.9, .7, true, .12);
+    revealText(type[6], 2.65, .45, false, .1);
+    revealText(type[7], 3.25, .5);
+    revealText(type[8], 3.45, .5);
 
-    [1.35, 1.85, 2.55, 3.2, 3.85, 5.9, 7.6].forEach((delay, index) => {
+    [.35, .55, .8, 1.1, 1.4, 2.45, 3.1].forEach((delay, index) => {
       rules[index].style.setProperty('--delay', `${delay}s`);
-      rules[index].style.setProperty('--duration', index < 2 ? '.8s' : '1.15s');
+      rules[index].style.setProperty('--duration', index < 2 ? '.4s' : '.5s');
       rules[index].style.setProperty('--origin', index % 2 ? 'right' : 'left');
     });
     label.classList.add('motion-ready');

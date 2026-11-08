@@ -1,4 +1,4 @@
-/* Nine-second opening. All movement resolves to the original label layout. */
+/* Four-second opening. All movement resolves to the original label layout. */
 .motion-pending .type, .motion-pending .rule { visibility: hidden; }
 .word-window, .line-window { display: inline-block; overflow: clip; vertical-align: top; }
 .word-window { padding-inline: .08em; margin-inline: -.08em; }
