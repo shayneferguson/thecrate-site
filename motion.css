@@ -1,0 +1,46 @@
+/* Nine-second opening. All movement resolves to the original label layout. */
+.motion-pending .type, .motion-pending .rule { visibility: hidden; }
+.word-window, .line-window { display: inline-block; overflow: clip; vertical-align: top; }
+.word-window { padding-inline: .08em; margin-inline: -.08em; }
+.word-ink, .line-ink { display: inline-block; }
+.line-window { display: block; }
+.motion-ready .word-ink,
+.motion-ready .line-ink {
+  animation: ink-arrive var(--duration, 1.1s) cubic-bezier(.16, 1, .3, 1) var(--delay, 0s) both;
+}
+.motion-ready .rule {
+  transform-origin: var(--origin, left) center;
+  animation: rule-draw var(--duration, 1s) cubic-bezier(.65, 0, .25, 1) var(--delay, 0s) both;
+}
+.motion-ready .headline .word-ink {
+  animation-name: headline-arrive;
+}
+.motion-ready .wordmark .word-ink {
+  animation-name: wordmark-arrive;
+}
+@keyframes ink-arrive {
+  from { transform: translate3d(0, 110%, 0); opacity: 0; }
+  30% { opacity: 1; }
+  to { transform: translate3d(0, 0, 0); opacity: 1; }
+}
+@keyframes headline-arrive {
+  from { transform: translate3d(0, 115%, 0) rotate(4deg); opacity: 0; }
+  25% { opacity: 1; }
+  to { transform: translate3d(0, 0, 0) rotate(0); opacity: 1; }
+}
+@keyframes wordmark-arrive {
+  from { transform: translate3d(-.12em, 110%, 0); opacity: 0; }
+  28% { opacity: 1; }
+  to { transform: translate3d(0, 0, 0); opacity: 1; }
+}
+@keyframes rule-draw {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+/* Visitors requesting less motion see the complete, stationary label. */
+@media (prefers-reduced-motion: reduce) {
+  .motion-pending .type, .motion-pending .rule { visibility: visible; }
+  .motion-ready .word-ink, .motion-ready .line-ink, .motion-ready .rule {
+    animation: none;
+  }
+}
