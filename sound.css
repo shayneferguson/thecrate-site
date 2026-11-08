@@ -1,4 +1,4 @@
-body main { padding: 16px 0 22px; gap: 12px; grid-template-rows: 1fr auto; }
+body main { min-height: 100svh; min-height: 100dvh; padding: 16px 0 max(12px, env(safe-area-inset-bottom)); gap: 8px; grid-template-rows: 1fr auto; }
 body .record-stage { position: relative; isolation: isolate; width: min(100vw, max(280px, calc(100svh - 112px)), 1100px); aspect-ratio: 1; display: grid; place-items: center; }
 body .record-stage article { width: 78%; z-index: 1; clip-path: circle(46% at 50% 50%); }
 /* Centre the paper's measured circular bounds, independently of its source canvas. */
@@ -11,11 +11,11 @@ body .record-stage article::before { content: ""; position: absolute; inset: 0; 
 .label-control { position: absolute; z-index: 2; inset: 5%; border: 0; padding: 0; border-radius: 50%; clip-path: circle(50%); background: transparent; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 .label-control[hidden] { display: none; }
 .label-control:focus-visible { outline: 2px solid #11130f; outline-offset: -8px; }
-.sound-panel { text-align: center; color: #e6d8b7; padding-inline: 16px; max-width: 100%; }
-.sound-credit { margin: 0; color: #a79d87; font-size: 10px; line-height: 1.5; letter-spacing: .05em; }
+.sound-panel { align-self: end; text-align: center; color: #e6d8b7; padding-inline: 16px; max-width: 100%; }
+.sound-credit { margin: 0; color: #a79d87; font-size: 10px; line-height: 1.2; letter-spacing: .05em; }
 .sound-credit span { margin-inline: 5px; }
-.sound-hint { color: #a79d87; font: 400 10px/1.6 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: .035em; margin: 8px 0 0; }
-.sound-status { font-size: 11px; line-height: 1.5; margin: 4px 0 0; }
+.sound-hint { color: #a79d87; font: 400 10px/1.2 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: .035em; margin: 2px 0 0; }
+.sound-status { font-size: 11px; line-height: 1.2; margin: 2px 0 0; }
 .sound-status:empty { display: none; }
 .sound-panel audio { max-width: 100%; margin-top: 12px; }
 .sound-enabled .sound-panel audio { display: none; }
