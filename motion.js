@@ -1,7 +1,11 @@
 (() => {
   const label = document.querySelector('article');
+  const stage = document.querySelector('.record-stage');
   const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if (!label || preference.matches) return;
+  if (!label || !stage || preference.matches) {
+    document.documentElement.classList.remove('motion-pending');
+    return;
+  }
 
   // Keep the complete static design visible if assets or scripts cannot load.
   // The sequence is installed atomically only after paper and fonts are ready.
@@ -15,6 +19,8 @@
     if (preference.matches) {
       cancelled = true;
       label.classList.remove('motion-ready');
+      stage.classList.remove('opening-ready');
+      document.documentElement.classList.remove('motion-pending');
     }
   });
 
@@ -31,7 +37,7 @@
       const decode = document.createElement('textarea');
       decode.innerHTML = piece;
       ink.textContent = decode.value;
-      ink.style.setProperty('--delay', `${delay + index * stagger}s`);
+      ink.style.setProperty('--delay', `${1.5 + delay + index * stagger}s`);
       ink.style.setProperty('--duration', `${duration}s`);
       window.append(ink);
       fragment.append(window);
@@ -50,21 +56,28 @@
 
     type[0].classList.add('wordmark');
     type[5].classList.add('headline');
-    revealText(type[0], .15, .55, true, .08);
-    revealText(type[1], .65, .45);
-    revealText(type[2], .9, .45);
-    revealText(type[3], 1.15, .5);
-    revealText(type[4], 1.45, .5);
-    revealText(type[5], 1.9, .7, true, .12);
-    revealText(type[6], 2.65, .45, false, .1);
-    revealText(type[7], 3.25, .5);
-    revealText(type[8], 3.45, .5);
+    // Paper reaches its final opacity at 1.5s; type then reveals over exactly 2s.
+    revealText(type[0], 0, .35, true, .04);
+    revealText(type[1], .25, .3);
+    revealText(type[2], .4, .3);
+    revealText(type[3], .55, .3);
+    revealText(type[4], .7, .3);
+    revealText(type[5], .9, .45, true, .06);
+    revealText(type[6], 1.25, .3, false, .06);
+    revealText(type[7], 1.55, .3);
+    revealText(type[8], 1.72, .28);
 
-    [.35, .55, .8, 1.1, 1.4, 2.45, 3.1].forEach((delay, index) => {
-      rules[index].style.setProperty('--delay', `${delay}s`);
-      rules[index].style.setProperty('--duration', index < 2 ? '.4s' : '.5s');
+    [.1, .2, .35, .5, .65, 1.1, 1.5].forEach((delay, index) => {
+      rules[index].style.setProperty('--delay', `${1.5 + delay}s`);
+      rules[index].style.setProperty('--duration', '.25s');
       rules[index].style.setProperty('--origin', index % 2 ? 'right' : 'left');
     });
+    // Release completed animation layers so the label stays crisp during audio taps.
+    type[8].querySelector('.line-ink').addEventListener('animationend', () => {
+      label.classList.remove('motion-ready');
+      stage.classList.remove('opening-ready');
+    }, { once: true });
+    stage.classList.add('opening-ready');
     label.classList.add('motion-ready');
   }).catch(() => {
     clearTimeout(timeout);

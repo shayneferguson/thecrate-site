@@ -1,4 +1,17 @@
-/* Four-second opening. All movement resolves to the original label layout. */
+/* One opening: grooves 0–0.8s, paper 0.65–1.5s, type 1.5–3.5s. */
+html.motion-pending body .record-stage article::before,
+html.motion-pending .record-grooves { opacity: 0; }
+.opening-ready .record-grooves { animation: grooves-enter .8s steps(1, end) both; }
+body .record-stage.opening-ready article::before { animation: paper-enter .85s ease-out .65s both; }
+@keyframes grooves-enter {
+  0%, 12% { opacity: 0; transform: translateX(0); clip-path: inset(0); }
+  18% { opacity: .5; transform: translateX(-5px); clip-path: polygon(0 12%,100% 12%,100% 30%,0 30%,0 55%,100% 55%,100% 78%,0 78%); }
+  32% { opacity: .18; transform: translateX(4px); clip-path: inset(30% 0 12%); }
+  48% { opacity: .5; transform: translateX(-2px); clip-path: inset(0); }
+  61% { opacity: .3; transform: translateX(3px); clip-path: inset(8% 0 22%); }
+  76%, 100% { opacity: .5; transform: translateX(0); clip-path: inset(0); }
+}
+@keyframes paper-enter { from { opacity: 0; } to { opacity: .8; } }
 .motion-pending .type, .motion-pending .rule { visibility: hidden; }
 .word-window, .line-window { display: inline-block; overflow: clip; vertical-align: top; }
 .word-window { padding-inline: .08em; margin-inline: -.08em; }
@@ -40,6 +53,10 @@
 /* Visitors requesting less motion see the complete, stationary label. */
 @media (prefers-reduced-motion: reduce) {
   .motion-pending .type, .motion-pending .rule { visibility: visible; }
+  html.motion-pending body .record-stage article::before { opacity: .8; }
+  html.motion-pending .record-grooves { opacity: .5; }
+  .opening-ready .record-grooves,
+  body .record-stage.opening-ready article::before { animation: none; }
   .motion-ready .word-ink, .motion-ready .line-ink, .motion-ready .rule {
     animation: none;
   }
