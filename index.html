@@ -12,6 +12,8 @@
 <link rel="stylesheet" href="motion.css">
 <script>document.documentElement.classList.add('motion-pending');setTimeout(()=>document.documentElement.classList.remove('motion-pending'),6500);</script>
 <script src="motion.js" defer></script>
+<link rel="stylesheet" href="sound.css">
+<script src="sound.js" defer></script>
 <style>
 *{box-sizing:border-box}html{background:#000100;color:#11130f}body{margin:0;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}main{min-height:100svh;display:grid;place-items:center}article{position:relative;width:min(100vw,96svh,1200px);aspect-ratio:1;container-type:inline-size;background:url('assets/worn-label-paper.png') center/100% 100% no-repeat}.type{position:absolute;margin:0;padding:0}.rule{position:absolute;background:#11130f}::selection{background:#11130f;color:#c8c4aa}
 </style></head><body><main><article aria-label="The Crate — Institute for Creative Thought record label">
@@ -31,4 +33,14 @@
 <span class="rule" aria-hidden="true" style="left:22.3333%;top:77.5%;width:57.3333%;height:0.208333%"></span>
 <p class="type" style="left:22.25%;top:78.96%;width:33.3333%;font-size:3cqw;line-height:1.15;letter-spacing:-0.02em;font-weight:400;font-style:normal">Coming soon</p>
 <p class="type" style="left:64.3333%;top:78.96%;width:19.1667%;font-size:3cqw;line-height:1.15;letter-spacing:-0.02em;font-weight:400;font-style:normal">thecrate.ca</p>
-</article></main></body></html>
+</article>
+<section class="sound-panel" aria-label="Soundtrack">
+  <button class="sound-toggle" type="button" aria-controls="soundtrack" hidden>
+    <svg class="sound-icon" width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path class="play-icon" d="M4 2.5 13 8 4 13.5Z"/><path class="pause-icon" d="M4 3h2v10H4zM10 3h2v10h-2z"/></svg>
+    <span class="sound-action">Play with sound</span>
+  </button>
+  <p class="sound-credit">Throop Avenue Last Call <span aria-hidden="true">/</span> 74 BPM</p>
+  <audio id="soundtrack" controls preload="none" aria-label="Throop Avenue Last Call, 74 BPM" src="assets/throop-avenue-last-call.mp3"></audio>
+  <p class="sound-status" role="status"></p>
+</section>
+</main></body></html>

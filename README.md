@@ -4,7 +4,7 @@ A responsive record-label placeholder for https://thecrate.ca, hosted on GitHub 
 
 The opening plays once per page load over 9.55 seconds: wordmark, catalogue details, institute lines, headline, introduction and footer. Motion waits for the paper and fonts. Reduced-motion visitors get the complete stationary label. Without JavaScript, the original static HTML remains readable. A bounded startup fallback prevents hidden text when resources fail.
 
-Motion timing is in motion.js; easing and masks are in motion.css. The original text and positions remain in index.html. No audio, playback controls or looping.
+Motion timing is in motion.js; easing and masks are in motion.css. The original text and positions remain in index.html. The separate soundtrack control starts Throop Avenue Last Call (74 BPM, 3:03). The first ten seconds of typography follow the audio clock, including pause/resume; the complete label then holds while the track continues. No autoplay or looping. The 192 kbps MP3 was encoded from the existing full SoundCraft WAV export; original audio is unchanged. Audio loads only when requested. Native audio controls remain available without JavaScript.
 
 Editable FigCraft and DesignCraft documents, motion source copies and the source builder are kept in the studio project, outside the public repository.
 

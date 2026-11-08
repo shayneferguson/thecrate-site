@@ -1,0 +1,15 @@
+body main { padding: 16px 0 22px; gap: 12px; grid-template-rows: 1fr auto; }
+body article { width: min(100vw, max(240px, calc(100svh - 124px)), 1200px); }
+.sound-panel { text-align: center; color: #e6d8b7; padding-inline: 16px; max-width: 100%; }
+.sound-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; padding: 8px 16px; border: 0; background: transparent; color: inherit; font: 500 11px/1.2 'Helvetica Neue', Helvetica, Arial, sans-serif; text-transform: uppercase; letter-spacing: .14em; cursor: pointer; touch-action: manipulation; }
+.sound-toggle[hidden] { display: none; }
+.sound-toggle:hover { color: #fff6de; }
+.sound-toggle:focus-visible { outline: 1px solid currentColor; outline-offset: 2px; }
+.sound-icon { fill: currentColor; flex-shrink: 0; }
+.pause-icon, .is-playing .play-icon { display: none; }
+.is-playing .pause-icon { display: block; }
+.sound-credit { margin: 0; color: #a79d87; font-size: 10px; line-height: 1.5; letter-spacing: .05em; }
+.sound-credit span { margin-inline: 5px; }
+.sound-status { font-size: 11px; line-height: 1.5; margin: 4px 0 0; }
+.sound-status:empty { display: none; }
+.sound-panel audio { max-width: 100%; margin-top: 12px; }
