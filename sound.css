@@ -1,5 +1,11 @@
 body main { padding: 16px 0 22px; gap: 12px; grid-template-rows: 1fr auto; }
-body article { width: min(100vw, max(240px, calc(100svh - 112px)), 1200px); }
+body .record-stage { position: relative; isolation: isolate; width: min(100vw, max(280px, calc(100svh - 112px)), 1100px); aspect-ratio: 1; display: grid; place-items: center; }
+body .record-stage article { width: 78%; z-index: 1; clip-path: circle(46% at 50% 50%); }
+.record-grooves { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; opacity: .6; }
+.groove { fill: none; stroke: #fff; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; transform-box: view-box; transform-origin: 50% 50%; animation: groove-orbit var(--turn) linear var(--phase) infinite var(--direction); }
+.record-stage[data-grooves="paused"] .groove { animation-play-state: paused; }
+@keyframes groove-orbit { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .groove { animation: none; } }
 .label-control { position: absolute; z-index: 2; inset: 5%; border: 0; padding: 0; border-radius: 50%; clip-path: circle(50%); background: transparent; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 .label-control[hidden] { display: none; }
 .label-control:focus-visible { outline: 2px solid #11130f; outline-offset: -8px; }
