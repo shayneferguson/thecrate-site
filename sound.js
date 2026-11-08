@@ -3,13 +3,14 @@
   const label = document.querySelector('article');
   const record = document.querySelector('.record-stage');
   const control = document.querySelector('.label-control');
+  const controls = [...document.querySelectorAll('.label-control, .record-touch')];
   const hint = document.querySelector('.sound-hint');
   const status = document.querySelector('.sound-status');
   if (!audio || !label || !control || !hint || !status) return;
 
   document.body.classList.add('sound-enabled');
   audio.controls = false;
-  control.hidden = false;
+  controls.forEach(button => { button.hidden = false; });
   let requested = false, started = false, groovesPaused = false;
   let request = 0, fadeFrame = 0, fadeVersion = 0;
   let context, gain;
@@ -36,9 +37,11 @@
   function update() {
     label.dataset.playback = requested ? 'playing' : 'paused';
     if (record) record.dataset.grooves = groovesPaused ? 'paused' : 'running';
-    control.setAttribute('aria-label', requested ? 'Pause Out the Crate' : started && !audio.ended ? 'Resume Out the Crate' : 'Start Out the Crate');
-    control.setAttribute('aria-pressed', String(requested));
-    hint.textContent = requested ? 'Touch the label to pause.' : started && !audio.ended ? 'Touch the label to resume.' : 'Touch the label to play.';
+    controls.forEach(button => {
+      button.setAttribute('aria-label', requested ? 'Pause Out the Crate' : started && !audio.ended ? 'Resume Out the Crate' : 'Start Out the Crate');
+      button.setAttribute('aria-pressed', String(requested));
+    });
+    hint.textContent = requested ? 'Touch the record to pause.' : started && !audio.ended ? 'Touch the record to resume.' : 'Touch the record to play.';
   }
   function fadeTo(target, duration, complete = () => {}) {
     cancelAnimationFrame(fadeFrame);
@@ -101,7 +104,7 @@
       fadeTo(0, 0);
       update();
       if (error.name !== 'NotAllowedError' && error.name !== 'AbortError')
-        status.textContent = 'Sound couldn’t start. Touch the label to retry.';
+        status.textContent = 'Sound couldn’t start. Touch the record to retry.';
     });
   }
   function pause(immediate = false) {
@@ -115,7 +118,7 @@
       if (token === request && !requested) audio.pause();
     });
   }
-  control.addEventListener('click', () => requested ? pause() : play(true));
+  controls.forEach(button => button.addEventListener('click', () => requested ? pause() : play(true)));
   audio.addEventListener('playing', () => {
     if (!requested) return;
     started = true;
@@ -143,7 +146,7 @@
     ++request;
     requested = false;
     fadeTo(0, 0);
-    status.textContent = 'Sound is unavailable. Touch the label to retry.';
+    status.textContent = 'Sound is unavailable. Touch the record to retry.';
     update();
   });
   document.addEventListener('visibilitychange', () => { if (document.hidden) pause(true); });
